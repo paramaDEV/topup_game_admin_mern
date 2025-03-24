@@ -9,6 +9,8 @@
   "dependencies": {
     "admin-lte": "^4.0.0-beta3",
     "cookie-parser": "~1.4.4",
+    "datatables.net": "^2.2.2",
+    "datatables.net-dt": "^2.2.2",
     "debug": "~2.6.9",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",

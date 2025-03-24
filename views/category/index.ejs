@@ -1,0 +1,86 @@
+<%- include('../components/header.ejs'); %>
+  <!--begin::Body-->
+  <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+    <!--begin::App Wrapper-->
+    <div class="app-wrapper">
+      <%- include('../components/navbar.ejs'); %>
+      <%- include('../components/sidebar.ejs'); %>
+      <!--begin::App Main-->
+      <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">Category</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="/category">Master</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Category</li>
+                  
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+         <!-- Fill contents here !!! -->
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!-- Timelime example  -->
+            <div class="row">
+              <div class="col-12">
+                <!-- The icons -->
+                <div class="col-12">
+                  <div class="card card-primary card-outline">
+                    <div class="card-header"><a href="/category/create"><button type="submit" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Add</button></a></div>
+                    <div class="card-body">
+                      <table id="example" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Category</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- <% for (let i=0; i<category.length; i++){ %>
+                              <tr>
+                                <td><%= i+1 %></td>
+                                <td><%= category[i].name %></td>
+                                <td><button class="btn btn-info m-1 mtn-md">Update</button><button class="btn btn-danger mtn-md m-1">Delete</button></td>
+                              </tr>
+                            <%} %> -->
+                            <% category.forEach((e,i)=>{ %>
+                              <tr>
+                                <td><%= i+1 %></td>
+                                <td><%= e.name %></td>
+                                <td><button class="btn btn-info m-1 mtn-md">Update</button><button class="btn btn-danger mtn-md m-1">Delete</button></td>
+                              </tr>
+                            <%}) %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!--end::App Content-->
+      </main>
+      <!--end::App Main-->
+
+<%- include('../components/footer.ejs'); %>
+<script type="module">
+  import '/datatable/js/dataTables.js' ;
+  new DataTable('#example');
+</script>
+
+

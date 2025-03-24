@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var dashboardRouter = require('./app/dashboard/route');
 var categoryRouter = require('./app/category/route');
 
 var app = express();
@@ -14,11 +15,16 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/adminlte',express.static(path.join(__dirname,'/node_modules/admin-lte/')))
-app.use('/', categoryRouter);
+app.use('/datatable',express.static(path.join(__dirname,'/node_modules/datatables.net/')))
+app.use('/datatable-dt',express.static(path.join(__dirname,'/node_modules/datatables.net-dt/')))
+app.use('/jquery',express.static(path.join(__dirname,'/node_modules/jquery/')))
+
+app.use('/', dashboardRouter);
+app.use('/category', categoryRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
