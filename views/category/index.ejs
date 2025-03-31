@@ -49,18 +49,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- <% for (let i=0; i<category.length; i++){ %>
-                              <tr>
-                                <td><%= i+1 %></td>
-                                <td><%= category[i].name %></td>
-                                <td><button class="btn btn-info m-1 mtn-md">Update</button><button class="btn btn-danger mtn-md m-1">Delete</button></td>
-                              </tr>
-                            <%} %> -->
                             <% category.forEach((e,i)=>{ %>
                               <tr>
                                 <td><%= i+1 %></td>
                                 <td><%= e.name %></td>
-                                <td><button class="btn btn-info m-1 mtn-md">Update</button><button class="btn btn-danger mtn-md m-1">Delete</button></td>
+                                <td>
+                                    <span class="d-flex flex-row">
+                                      <a href="/category/edit/<%= e._id %> "><button class="btn btn-info m-1 btn-md">Update</button></a>
+                                      <form method="POST" action="/category/delete?_method=DELETE"><input type="hidden" name="id" value="<%= e._id%>"><button class="btn btn-danger btn-md m-1" type="submit" onclick="return confirm('Are you sure?')">Delete</button></form>
+                                    </span>
+                                </td>
                               </tr>
                             <%}) %>
                         </tbody>
