@@ -1,8 +1,9 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const body_parser=require('body-parser')
+const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
+const session = require('express-session')
 const logger = require('morgan');
 const methodOverride = require('method-override')
 
@@ -20,11 +21,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(methodOverride('_method'))
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {}
+}))
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/adminlte',express.static(path.join(__dirname,'/node_modules/admin-lte/')))
 app.use('/datatable',express.static(path.join(__dirname,'/node_modules/datatables.net/')))
 app.use('/datatable-dt',express.static(path.join(__dirname,'/node_modules/datatables.net-dt/')))
 app.use('/jquery',express.static(path.join(__dirname,'/node_modules/jquery/')))
+app.use('/sweetalert',express.static(path.join(__dirname,'/node_modules/sweetalert2/')))
+app.use('/app',express.static(path.join(__dirname,'/app')))
+
 
 
 app.use('/', dashboardRouter);
