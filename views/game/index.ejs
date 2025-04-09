@@ -40,8 +40,8 @@
                 <% } %>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
-                  <li class="breadcrumb-item"><a href="/category">Master</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Category</li>
+                  <li class="breadcrumb-item"><a href="/game">Master</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Game</li>
                 </ol>
               </div>
             </div>
@@ -61,29 +61,31 @@
                 <!-- The icons -->
                 <div class="col-12">
                   <div class="card card-primary card-outline">
-                    <div class="card-header"><a href="/category/create"><button type="submit" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Add</button></a></div>
+                    <div class="card-header"><a href="/game/create"><button type="button" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Add</button></a></div>
                     <div class="card-body">
-                      <table id="example" class="display" style="width:100%">
+                      <table id="example2" class="display" style="width:100%">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Name</th>
+                                <th>Category</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <% category.forEach((e,i)=>{ %>
-                              <tr>
-                                <td><%= i+1 %></td>
-                                <td><%= e.name %></td>
-                                <td>
-                                    <span class="d-flex flex-row">
-                                      <a href="/category/edit/<%= e._id %> "><button class="btn btn-info m-1 btn-md">Update</button></a>
-                                      <form method="POST" action="/category/delete?_method=DELETE" name="delete-category<%= i+1 %>"><input type="hidden" name="id" value="<%= e._id%>"><button type="button" class="btn btn-danger btn-md m-1" onclick="confirmationDialog('delete-category<%= i+1 %>')">Delete</button></form>
-                                    </span>
-                                </td>
-                              </tr>
-                            <%}) %>
+                          <% game.forEach((e,i)=>{ %>
+                            <tr>
+                              <td><%= i+1 %></td>
+                              <td><%= e.name %></td>
+                              <td><%= e.category[0].name %></td>
+                              <td>
+                                  <span class="d-flex flex-row">
+                                    <a href="/game/edit/<%= e._id %> "><button class="btn btn-info m-1 btn-md">Update</button></a>
+                                    <form method="POST" action="/game/delete?_method=DELETE" name="delete-game<%= i+1 %>"><input type="hidden" name="id" value="<%= e._id%>"><button type="button" class="btn btn-danger btn-md m-1" onclick="confirmationDialog('delete-game<%= i+1 %>')">Delete</button></form>
+                                  </span>
+                              </td>
+                            </tr>
+                          <%}) %>
                         </tbody>
                       </table>
                     </div>
@@ -100,7 +102,7 @@
 
 <%- include('../components/footer.ejs'); %>
 <script type="module">
-  new DataTable('#example');
+  new DataTable('#example2');
 </script>
 
 

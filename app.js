@@ -9,6 +9,7 @@ const methodOverride = require('method-override')
 
 const dashboardRouter = require('./app/dashboard/route');
 const categoryRouter = require('./app/category/route');
+const gameRouter = require('./app/game/route');
 
 const app = express();
 
@@ -34,12 +35,14 @@ app.use('/datatable',express.static(path.join(__dirname,'/node_modules/datatable
 app.use('/datatable-dt',express.static(path.join(__dirname,'/node_modules/datatables.net-dt/')))
 app.use('/jquery',express.static(path.join(__dirname,'/node_modules/jquery/')))
 app.use('/sweetalert',express.static(path.join(__dirname,'/node_modules/sweetalert2/')))
+app.use('/select2',express.static(path.join(__dirname,'/node_modules/select2/')))
 app.use('/app',express.static(path.join(__dirname,'/app')))
 
 
 
 app.use('/', dashboardRouter);
 app.use('/category', categoryRouter);
+app.use('/game',gameRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

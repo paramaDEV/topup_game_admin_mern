@@ -13,12 +13,12 @@
           <div class="container-fluid">
             <!--begin::Row-->
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Edit Category</h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">Edit Game</h3></div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
-                  <li class="breadcrumb-item"><a href="/category">Master</a></li>
-                  <li class="breadcrumb-item active">Category</li>
-                  <li class="breadcrumb-item active" aria-current="page">Edit Category</li>
+                  <li class="breadcrumb-item"><a href="/game">Master</a></li>
+                  <li class="breadcrumb-item active">Game</li>
+                  <li class="breadcrumb-item active" aria-current="page">Edit Game</li>
                 </ol>
               </div>
             </div>
@@ -32,25 +32,35 @@
          <!-- Fill contents here !!! -->
           <div class="card card-primary card-outline mb-4">
             <!--begin::Header-->
-            <div class="card-header"><div class="card-title">Edit Form</div></div>
+            <div class="card-header"><div class="card-title">Edit Form </div></div>
             <!--end::Header-->
             <!--begin::Form-->
-            <form  method="POST" action="/category/edit?_method=PUT">
+            <form method="POST" action="/game/edit?_method=PUT">
               <!--begin::Body-->
               <div class="card-body">
                 <div class="mb-3">
-                  <label for="categoryName" class="form-label">Name*</label>
+                  <input type="hidden" name="id" value="<%= game._id%>">
+                  <label for="gameName" class="form-label">Name*</label>
                   <input
                     type="onput"
                     class="form-control"
-                    id="categoryName"
+                    id="gameName"
                     aria-describedby="emailHelp"
-                    placeholder="Input Category Name"
+                    placeholder="Input Game Name"
                     name="name"
-                    value="<%= category.name %>"
+                    value="<%= game.name%>"
                     required
                   />
-                  <input type="hidden" name="id"  value="<%= category._id %>">
+                  <label for="categoryId" class="form-label mt-2">Category*</label>
+                  <select class="select-category form-control" name="categoryId">
+                    <% category.forEach((e,i)=>{ %>
+                      <% if(game.categoryId==e._id.toString()) {%>
+                        <option value="<%= e._id %>" selected><%= e.name %></option>
+                      <% }else{ %>
+                        <option value="<%= e._id %>"><%= e.name %></option>
+                      <%}%>
+                    <% }) %>
+                  </select>
                 </div>
               </div>
               <!--end::Body-->
@@ -68,4 +78,8 @@
       <!--end::App Main-->
 
 <%- include('../components/footer.ejs'); %>
-
+<script>
+  $(document).ready(function() {
+    $('.select-category').select2();
+  });
+</script>

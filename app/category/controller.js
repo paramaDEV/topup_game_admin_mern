@@ -1,13 +1,10 @@
-
-
 const Category = require('./model')
 const session = require('express-session')
-const globals = require('../GlobalVariables.js')
 module.exports = {
   index:async(req,res)=>{
     try{
       const category = await Category.find();
-      alertStatus=req.session.alertStatus,
+      alertStatus=req.session.alertStatus
       alertMessage=req.session.alertMessage
       res.render('category/index',{category,alertStatus,alertMessage})
       req.session.destroy()
@@ -17,7 +14,6 @@ module.exports = {
   },
   viewCreate:async(req,res)=>{
     try{
-        req.session.destroy()
         res.render('category/create')
     }catch(e){
         console.log(e)
@@ -46,7 +42,7 @@ module.exports = {
   },
   actionEdit:async(req,res)=>{
     try{
-        const {id,name} = req.body
+        const {id,name} = await req.body
         const category = await Category.findByIdAndUpdate(id,{name})
         req.session.alertStatus='success'
         req.session.alertMessage='Data updated successfully !'
@@ -57,7 +53,7 @@ module.exports = {
   },
   actionDelete:async(req,res)=>{
     try{
-        const {id} = req.body
+        const {id} = await req.body
         const category = await Category.findByIdAndDelete(id)
         req.session.alertStatus='success'
         req.session.alertMessage='Data deleted successfully !'
