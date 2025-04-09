@@ -29,7 +29,7 @@
           <div class="container-fluid">
             <!--begin::Row-->
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Game</h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">Item</h3></div>
               <% if(alertMessage) {%>
                 <script type="module">Swal.fire({
                     icon: "<%= alertStatus %>",
@@ -40,8 +40,8 @@
                 <% } %>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
-                  <li class="breadcrumb-item"><a href="/game">Master</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Game</li>
+                  <li class="breadcrumb-item"><a href="/item">Master</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Item</li>
                 </ol>
               </div>
             </div>
@@ -61,27 +61,27 @@
                 <!-- The icons -->
                 <div class="col-12">
                   <div class="card card-primary card-outline">
-                    <div class="card-header"><a href="/game/create"><button type="button" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Add</button></a></div>
+                    <div class="card-header"><a href="/item/create"><button type="button" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Add</button></a></div>
                     <div class="card-body">
                       <table id="example2" class="display" style="width:100%">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Name</th>
-                                <th>Category</th>
+                                <th>Game</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                          <% game.forEach((e,i)=>{ %>
+                          <% item.forEach((e,i)=>{ %>
                             <tr>
                               <td><%= i+1 %></td>
                               <td><%= e.name %></td>
-                              <td><%= e.category[0].name %></td>
+                              <td><%= e.game[0].name %></td>
                               <td>
                                   <span class="d-flex flex-row">
-                                    <a href="/game/edit/<%= e._id %> "><button class="btn btn-info m-1 btn-md">Update</button></a>
-                                    <form method="POST" action="/game/delete?_method=DELETE" name="delete-game<%= i+1 %>"><input type="hidden" name="id" value="<%= e._id%>"><button type="button" class="btn btn-danger btn-md m-1" onclick="confirmationDialog('delete-game<%= i+1 %>')">Delete</button></form>
+                                    <a href="/item/edit/<%= e._id %> "><button class="btn btn-info m-1 btn-md">Update</button></a>
+                                    <form method="POST" action="/item/delete?_method=DELETE" name="delete-item<%= i+1 %>"><input type="hidden" name="id" value="<%= e._id%>"><button type="button" class="btn btn-danger btn-md m-1" onclick="confirmationDialog('delete-item<%= i+1 %>')">Delete</button></form>
                                   </span>
                               </td>
                             </tr>

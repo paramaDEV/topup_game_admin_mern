@@ -1,5 +1,6 @@
 const Game = require('./model')
 const Category = require('../category/model')
+const Item = require('../item/model')
 const session = require('express-session')
 
 
@@ -71,9 +72,18 @@ module.exports = {
    actionDelete:async(req,res)=>{
       try{
           const {id} = await req.body
-          const game = await Game.findByIdAndDelete(id)
-          req.session.alertStatus='success'
-          req.session.alertMessage='Data deleted successfully !'
+          const item = await Item.find({gameId:id})
+
+          if(item.length>0){
+            req.session.alertStatus='error'
+            req.session.alertMessage='Cannot delete data because there is other data that depends on it !'
+          }else{
+            const game = await Game.findByIdAndDelete(id)
+            req.session.alertStatus='success'
+            req.session.alertMessage='Data deleted successfully !'
+          }
+
+
           res.redirect('/game')
       }catch(e){
           console.log(e)

@@ -10,6 +10,7 @@ const methodOverride = require('method-override')
 const dashboardRouter = require('./app/dashboard/route');
 const categoryRouter = require('./app/category/route');
 const gameRouter = require('./app/game/route');
+const itemRouter = require('./app/item/route')
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use('/app',express.static(path.join(__dirname,'/app')))
 app.use('/', dashboardRouter);
 app.use('/category', categoryRouter);
 app.use('/game',gameRouter)
+app.use('/item',itemRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
